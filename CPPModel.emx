@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--xtools2_universal_type_manager-->
-<!--HCL RealTime Software Tooling 10.3.0-->
+<!--HCL RTist 11.1.0-->
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.uml.msl.model" version="7.0.0"><feature description="" name="com.ibm.xtools.ruml.feature" url="" version="7.0.0"/></signature>?>
 <?com.ibm.xtools.emf.core.signature <signature id="com.ibm.xtools.mmi.ui.signatures.diagram" version="7.0.0"><feature description="" name="RTist Modeling Platform (com.ibm.xtools.rmp)" url="" version="7.0.0"/></signature>?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:CppPropertySets="http:///schemas/CppPropertySets/_5TG7AMk4EeO2m9WtkWjeeQ/67" xmlns:Default="http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2" xmlns:UMLRealTime="http:///schemas/UMLRealTime/_3TUzoHq6Ed2hSeAAWZznoA/119" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:umlnotation="http://www.ibm.com/xtools/1.5.3/Umlnotation" xsi:schemaLocation="http:///schemas/CppPropertySets/_5TG7AMk4EeO2m9WtkWjeeQ/67 pathmap://CPP_LANGUAGE_PROFILE/CppPropertySets.epx#_5TYAwMk4EeO2m9WtkWjeeQ?CppPropertySets/CppPropertySets? http:///schemas/Default/_fNm3AAqoEd6-N_NOT9vsCA/2 pathmap://UML2_MSL_PROFILES/Default.epx#_fNwoAAqoEd6-N_NOT9vsCA?Default/Default? http:///schemas/UMLRealTime/_3TUzoHq6Ed2hSeAAWZznoA/119 pathmap://RT_PROPERTIES/UMLRealTime.epx#_3TUzoXq6Ed2hSeAAWZznoA?UMLRealTime/UMLRealTime?">
@@ -262,21 +262,25 @@
             <region xmi:id="_nBcJgPMNEeiMwvLnGvgCsg" name="Region1">
               <transition xmi:id="_nBcJgvMNEeiMwvLnGvgCsg" name="ping" kind="internal" source="_0m9ZdPMMEeiMwvLnGvgCsg" target="_0m9ZdPMMEeiMwvLnGvgCsg">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_yjoaUPMNEeiMwvLnGvgCsg" name="Effect">
-                  <language>C++</language>
-                  <body>bool b = true; // ping&#xD;
-count = *((int*) rtdata);&#xD;
-timer.informIn(RTTimespec(1, 0), &amp;b, &amp;RTType_bool);</body>
+                  <language><![CDATA[C++]]></language>
+                  <body><![CDATA[
+bool b = true; // ping
+count = *((int*) rtdata);
+timer.informIn(RTTimespec(1, 0), &b, &RTType_bool);
+]]></body>
                 </effect>
                 <trigger xmi:id="_pAhsYPMNEeiMwvLnGvgCsg" name="" event="_XltbUPMNEeiMwvLnGvgCsg" port="_4oCpQPMMEeiMwvLnGvgCsg"/>
               </transition>
               <transition xmi:id="_1YH7MPMNEeiMwvLnGvgCsg" name="timeout" kind="internal" source="_0m9ZdPMMEeiMwvLnGvgCsg" target="_0m9ZdPMMEeiMwvLnGvgCsg">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_IvpJgPMOEeiMwvLnGvgCsg" name="Effect">
-                  <language>C++</language>
-                  <body>bool isPing = *((bool*) rtdata);&#xD;
-if (isPing)&#xD;
-	server.pong(count + 1).send();&#xD;
-else&#xD;
-	server.ping(count + 1).send();</body>
+                  <language><![CDATA[C++]]></language>
+                  <body><![CDATA[
+bool isPing = *((bool*) rtdata);
+if (isPing)
+	server.pong(count + 1).send();
+else
+	server.ping(count + 1).send();
+]]></body>
                 </effect>
                 <trigger xmi:id="_2yWdgPMNEeiMwvLnGvgCsg" name="" port="_zyGYkPMNEeiMwvLnGvgCsg">
                   <event xmi:type="uml:CallEvent" href="platform:/plugin/com.ibm.xtools.umldt.rt.cpp.core/libraries/RTClasses.emx#_18o5ErIlEduJc5NEaBCMOw?RTClasses/Timing/timeout?"/>
@@ -284,10 +288,12 @@ else&#xD;
               </transition>
               <transition xmi:id="_lePSIPOhEeiMwvLnGvgCsg" name="pong" kind="internal" source="_0m9ZdPMMEeiMwvLnGvgCsg" target="_0m9ZdPMMEeiMwvLnGvgCsg">
                 <effect xmi:type="uml:OpaqueBehavior" xmi:id="_zuhg4POhEeiMwvLnGvgCsg" name="Effect">
-                  <language>C++</language>
-                  <body>bool b = false; // pong&#xD;
-count = *((int*) rtdata);&#xD;
-timer.informIn(RTTimespec(1, 0), &amp;b, &amp;RTType_bool);</body>
+                  <language><![CDATA[C++]]></language>
+                  <body><![CDATA[
+bool b = false; // pong
+count = *((int*) rtdata);
+timer.informIn(RTTimespec(1, 0), &b, &RTType_bool);
+]]></body>
                 </effect>
                 <trigger xmi:id="_oJeJUPOhEeiMwvLnGvgCsg" name="" event="_u1eOEPMvEeiMwvLnGvgCsg" port="_4oCpQPMMEeiMwvLnGvgCsg"/>
               </transition>
@@ -383,19 +389,21 @@ timer.informIn(RTTimespec(1, 0), &amp;b, &amp;RTType_bool);</body>
         <extendedStateMachine href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTPe5TEeitL-zKjjNp2A?LibTCPServer/TCPServer/State%20Machine?"/>
       </ownedBehavior>
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_kyTPEPMmEeiMwvLnGvgCsg" name="init" specification="_yy870PMlEeiMwvLnGvgCsg">
-        <language>C++</language>
-        <body>int ac = RTMain::argCount();&#xD;
-const char * const * av = RTMain::argStrings();&#xD;
-&#xD;
-while( --ac > 0 ) {&#xD;
-	const char* arg = *++av;&#xD;
-	if( RTMemoryUtil::strcmp( arg, &quot;-remotePort=&quot;, 12 ) == 0 )&#xD;
-		config.remotePort = RTMemoryUtil::atoi(*av + 12);&#xD;
-	if( RTMemoryUtil::strcmp( arg, &quot;-port=&quot;, 6 ) == 0 )&#xD;
-			config.port = RTMemoryUtil::atoi(*av + 6);&#xD;
-}&#xD;
-&#xD;
-cout &lt;&lt; &quot;Incoming port: &quot; &lt;&lt; config.port &lt;&lt; endl &lt;&lt; flush;</body>
+        <language><![CDATA[C++]]></language>
+        <body><![CDATA[
+int ac = RTMain::argCount();
+const char * const * av = RTMain::argStrings();
+
+while( --ac > 0 ) {
+	const char* arg = *++av;
+	if( RTMemoryUtil::strcmp( arg, "-remotePort=", 12 ) == 0 )
+		config.remotePort = RTMemoryUtil::atoi(*av + 12);
+	if( RTMemoryUtil::strcmp( arg, "-port=", 6 ) == 0 )
+			config.port = RTMemoryUtil::atoi(*av + 6);
+}
+
+cout << "Incoming port: " << config.port << endl << flush;
+]]></body>
       </ownedBehavior>
       <ownedOperation xmi:id="_yy870PMlEeiMwvLnGvgCsg" name="init" method="_kyTPEPMmEeiMwvLnGvgCsg"/>
     </packagedElement>
@@ -458,7 +466,12 @@ cout &lt;&lt; &quot;Incoming port: &quot; &lt;&lt; config.port &lt;&lt; endl &lt
   <UMLRealTime:RTPort xmi:id="_zyGYkfMNEeiMwvLnGvgCsg" isWired="false" base_Port="_zyGYkPMNEeiMwvLnGvgCsg"/>
   <CppPropertySets:GeneralOperationProperties xmi:id="_yy870fMlEeiMwvLnGvgCsg" base_Operation="_yy870PMlEeiMwvLnGvgCsg" polymorphic="true"/>
   <CppPropertySets:GeneralCapsuleProperties xmi:id="_naNFcPMmEeiMwvLnGvgCsg" base_Class="__4yTAPMMEeiMwvLnGvgCsg">
-    <implementationPreface xmi:id="_naNFcfMmEeiMwvLnGvgCsg" body="#include &lt;iostream>&#xD;&#xA;using namespace std;"/>
+    <implementationPreface xmi:id="_naNFcfMmEeiMwvLnGvgCsg">
+      <body><![CDATA[
+#include <iostream>
+using namespace std;
+]]></body>
+    </implementationPreface>
   </CppPropertySets:GeneralCapsuleProperties>
   <UMLRealTime:OutEvent xmi:id="_u1gDQPMvEeiMwvLnGvgCsg" base_CallEvent="_u1eOEPMvEeiMwvLnGvgCsg"/>
   <UMLRealTime:InEvent xmi:id="_wPfVAPMvEeiMwvLnGvgCsg" base_CallEvent="_wPeG4PMvEeiMwvLnGvgCsg"/>
