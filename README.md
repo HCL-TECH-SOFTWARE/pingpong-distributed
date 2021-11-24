@@ -8,11 +8,17 @@ Edit the property `tc.pocoLoc` to specify the location of the POCO C++ libraries
 
 ## Usage
 Start each application with command-line arguments specifying a local and remote port. For example:
-
-`
+```
 executable.EXE -URTS_DEBUG=quit -port=15000 -remotePort=16000
-`
+```
 
 In this case the started executable will listen for incoming messages on port 15000 and send outgoing messages to port 16000. The other application should then be started with the reversed arguments, i.e. with `-port=16000 -remotePort=15000`. It is assumed that both applications run on the same machine. If you want to run them on separate machines, edit PingPongServer::init() to add another command-line argument for specifying the remote hostname.
 
-Initially both applications will wait for each other to send the first event, so nothing will happen. To make the ping pong game start you have to inject either the "ping" or "pong" event on the "PingPongServer::player" port. You can do this from another application by using the JSON API provided by [lib-tcp-server](https://github.com/hcl-pnp-rtist/lib-tcp-server). As an alternative, you can attach to one of the applications using the RTist Model Debugger and send the "timeout" event to the "Player::timer" port. 
+Initially both applications will wait for each other to send the first event, so nothing will happen. There are several ways to make the ping pong game start:
+* pass `-injectFirstPing` argument to one of applications, then first signal will be injected programmatically from within the application. For example:
+```
+executable.EXE -URTS_DEBUG=quit -port=15000 -remotePort=16000
+executable.EXE -URTS_DEBUG=quit -port=16000 -remotePort=15000 -injectFirstPing
+```
+* inject either the "ping" or "pong" event on the "PingPongServer::player" port. You can do this from another application by using the JSON API provided by [lib-tcp-server](https://github.com/hcl-pnp-rtist/lib-tcp-server).
+* attach to one of the applications using the RTist Model Debugger and send the "timeout" event to the "Player::timer" port.

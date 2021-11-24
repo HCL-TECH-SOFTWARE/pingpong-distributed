@@ -370,6 +370,12 @@ timer.informIn(RTTimespec(1, 0), &b, &RTType_bool);
         <general xmi:type="uml:Class" href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTMO5TEeitL-zKjjNp2A?LibTCPServer/TCPServer?"/>
       </generalization>
       <ownedAttribute xmi:type="uml:Port" xmi:id="_JA344PMNEeiMwvLnGvgCsg" name="player" visibility="public" type="_4n2cAvMMEeiMwvLnGvgCsg" aggregation="composite" isBehavior="true"/>
+      <ownedAttribute xmi:id="_QmcF8E0WEeyac6cGzV7LqA" name="injectPing" visibility="public" isStatic="true">
+        <type xmi:type="uml:PrimitiveType" href="platform:/plugin/com.ibm.xtools.umldt.rt.cpp.core/libraries/CppPrimitiveDatatypes.emx#_f0875RKyEdyaM9S2zG4bgA?CppPrimitiveDatatypes/bool?"/>
+        <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_QmcF8U0WEeyac6cGzV7LqA">
+          <type xmi:type="uml:PrimitiveType" href="platform:/plugin/com.ibm.xtools.umldt.rt.cpp.core/libraries/CppPrimitiveDatatypes.emx#_f0875RKyEdyaM9S2zG4bgA?CppPrimitiveDatatypes/bool?"/>
+        </defaultValue>
+      </ownedAttribute>
       <ownedBehavior xmi:type="uml:StateMachine" xmi:id="__45AsPMMEeiMwvLnGvgCsg" name="State Machine">
         <eAnnotations xmi:id="__45AuPMMEeiMwvLnGvgCsg" source="uml2.diagrams" references="__45AufMMEeiMwvLnGvgCsg">
           <contents xmi:type="umlnotation:UMLDiagram" xmi:id="__45AufMMEeiMwvLnGvgCsg" type="Statechart" element="__45AsPMMEeiMwvLnGvgCsg" measurementUnit="Himetric">
@@ -379,11 +385,40 @@ timer.informIn(RTTimespec(1, 0), &b, &RTType_bool);
               </children>
               <children xmi:type="notation:BasicDecorationNode" xmi:id="__45AvPMMEeiMwvLnGvgCsg" type="Name"/>
               <element xmi:type="uml:StateMachine" href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTPe5TEeitL-zKjjNp2A?LibTCPServer/TCPServer/State%20Machine?"/>
-              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__45AvfMMEeiMwvLnGvgCsg" x="793" y="793"/>
+              <layoutConstraint xmi:type="notation:Bounds" xmi:id="__45AvfMMEeiMwvLnGvgCsg" x="635" y="635"/>
             </children>
           </contents>
         </eAnnotations>
         <region xmi:id="__45AsfMMEeiMwvLnGvgCsg" name="Region1">
+          <transition xmi:id="_A4-5IE0XEeyac6cGzV7LqA" name="Initial">
+            <redefinedTransition href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTfO5TEeitL-zKjjNp2A?LibTCPServer/TCPServer/State%20Machine/Region1/Initial?"/>
+            <effect xmi:type="uml:OpaqueBehavior" xmi:id="_A5J4QE0XEeyac6cGzV7LqA" name="Effect">
+              <language><![CDATA[C++]]></language>
+              <body><![CDATA[
+CALLSUPER;
+cout << "TCP server started!" << endl;
+
+// Inject first signal
+if (injectPing) {
+	cout << "Sleeping 1 second before injecting a signal ..." << endl;
+	chrono::seconds timespan(1);
+	this_thread::sleep_for(timespan);
+	cout << "Sleeping done" << endl;
+
+	RTMessage * msg = context()->newMsg();
+	int* data = new int(0);
+
+	msg->setData(data, &RTType_int);
+	msg->setSignal(PingPongProtocol::Base::rti_ping);
+	msg->setPriority(General);
+	msg->setDestination(this, &player, 0);
+	msg->internData();
+
+	context()->receive(msg, context());
+}
+]]></body>
+            </effect>
+          </transition>
           <extendedRegion href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTd-5TEeitL-zKjjNp2A?LibTCPServer/TCPServer/State%20Machine/Region1?"/>
         </region>
         <extendedStateMachine href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTPe5TEeitL-zKjjNp2A?LibTCPServer/TCPServer/State%20Machine?"/>
@@ -400,6 +435,8 @@ while( --ac > 0 ) {
 		config.remotePort = RTMemoryUtil::atoi(*av + 12);
 	if( RTMemoryUtil::strcmp( arg, "-port=", 6 ) == 0 )
 			config.port = RTMemoryUtil::atoi(*av + 6);
+	if( RTMemoryUtil::strcmp( arg, "-injectFirstPing", 16 ) == 0 )
+		injectPing = true;
 }
 
 cout << "Incoming port: " << config.port << endl << flush;
@@ -469,10 +506,15 @@ cout << "Incoming port: " << config.port << endl << flush;
     <implementationPreface xmi:id="_naNFcfMmEeiMwvLnGvgCsg">
       <body><![CDATA[
 #include <iostream>
+#include <chrono>
+#include <thread>
 using namespace std;
 ]]></body>
     </implementationPreface>
   </CppPropertySets:GeneralCapsuleProperties>
   <UMLRealTime:OutEvent xmi:id="_u1gDQPMvEeiMwvLnGvgCsg" base_CallEvent="_u1eOEPMvEeiMwvLnGvgCsg"/>
   <UMLRealTime:InEvent xmi:id="_wPfVAPMvEeiMwvLnGvgCsg" base_CallEvent="_wPeG4PMvEeiMwvLnGvgCsg"/>
+  <UMLRealTime:RTRedefinableElement xmi:id="_A5G08E0XEeyac6cGzV7LqA" base_RedefinableElement="_A4-5IE0XEeyac6cGzV7LqA">
+    <rootFragment xmi:type="uml:Transition" href="platform:/resource/LibTcpServer/LibTCPServer.emx#_5rHTfO5TEeitL-zKjjNp2A?LibTCPServer/TCPServer/State%20Machine/Region1/Initial?"/>
+  </UMLRealTime:RTRedefinableElement>
 </xmi:XMI>
