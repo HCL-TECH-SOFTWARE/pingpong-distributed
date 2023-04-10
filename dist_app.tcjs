@@ -11,6 +11,6 @@ tc.prerequisites = [
 tc.compilationMakeType = MakeType.MS_nmake;
 tc.compileArguments = '$(DEBUG_TAG)';
 tc.linkArguments = '/DEBUG /MACHINE:X64 /LIBPATH:"' + tc.pocoLoc + '\\lib64"';
-tc.targetConfiguration = 'WinT.x64-VisualC++-15.0';
+tc.targetConfiguration = 'WinT.x64-VisualC++-17.0';
 tc.targetServicesLibrary = 'D:\\git\\rsarte-target-rts\\rsa_rt\\C++\\TargetRTS';
 tc.topCapsule = 'platform:/resource/DistributedPingPong/CPPModel.emx#_vAzCMPMMEeiMwvLnGvgCsg';
