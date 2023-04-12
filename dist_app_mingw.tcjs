@@ -10,7 +10,7 @@ tc.prerequisites = [
 ];
 tc.compilationMakeType = MakeType.GNU_make;
 tc.compileArguments = '$(DEBUG_TAG) -fexceptions -DPOCO_STATIC';
-tc.targetConfiguration = 'WinT.x64-MinGw-8.1.0';
+tc.targetConfiguration = 'WinT.x64-MinGw-12.2.0';
 tc.targetServicesLibrary = '${RSA_RT_HOME}/C++/TargetRTS';
 tc.topCapsule = 'platform:/resource/DistributedPingPong/CPPModel.emx#_vAzCMPMMEeiMwvLnGvgCsg';
 tc.linkArguments = '-L' + tc.pocoLoc + '/' + tc.targetConfiguration;
