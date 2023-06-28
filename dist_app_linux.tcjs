@@ -1,5 +1,4 @@
 let tc = TCF.define(TCF.CPP_TRANSFORM);
-//tc.pocoLoc = '/home/tests/poco';
 tc.sources = [
     'platform:/resource/DistributedPingPong/CPPModel.emx#_qJc4wfMMEeiMwvLnGvgCsg'
 ];
@@ -10,11 +9,6 @@ tc.prerequisites = [
 ];
 tc.compilationMakeType = MakeType.GNU_make;
 tc.compileArguments = '$(DEBUG_TAG)';
-tc.inclusionPaths = [
-
-];
 tc.targetConfiguration = 'LinuxT.x64-gcc-12.x';
 tc.targetServicesLibrary = '${RSA_RT_HOME}/C++/TargetRTS';
 tc.topCapsule = 'platform:/resource/DistributedPingPong/CPPModel.emx#_vAzCMPMMEeiMwvLnGvgCsg';
-//tc.linkArguments = '-L' + tc.pocoLoc + '/lib/Linux/x86_64/ -lPocoJSON -lPocoNet -lPocoFoundation';
-tc.cppCodeStandard = 'C++ 98';
