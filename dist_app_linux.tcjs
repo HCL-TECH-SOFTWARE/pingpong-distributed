@@ -10,5 +10,4 @@ tc.prerequisites = [
 tc.compilationMakeType = MakeType.GNU_make;
 tc.compileArguments = '$(DEBUG_TAG)';
 tc.targetConfiguration = 'LinuxT.x64-gcc-12.x';
-tc.targetServicesLibrary = '${RSA_RT_HOME}/C++/TargetRTS';
 tc.topCapsule = 'platform:/resource/DistributedPingPong/CPPModel.emx#_vAzCMPMMEeiMwvLnGvgCsg';

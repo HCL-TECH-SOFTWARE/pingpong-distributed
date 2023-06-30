@@ -10,5 +10,4 @@ tc.prerequisites = [
 tc.compilationMakeType = MakeType.MS_nmake;
 tc.compileArguments = '$(DEBUG_TAG)';
 tc.targetConfiguration = 'WinT.x64-VisualC++-17.0';
-tc.targetServicesLibrary = '${RSA_RT_HOME}/C++/TargetRTS';
 tc.topCapsule = 'platform:/resource/DistributedPingPong/CPPModel.emx#_vAzCMPMMEeiMwvLnGvgCsg';
